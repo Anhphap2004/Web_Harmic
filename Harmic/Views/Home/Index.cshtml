@@ -948,13 +948,22 @@
                             <div class="product-item">
                                 <div class="product-img img-zoom-effect">
                                     <a href="single-product.html">
-                                        <img class="img-full" src="~/assets/images/product/medium-size/@item.Image" alt="Product Images">
+                                        <img class="img-full" src="@item.Image" alt="Product Images">
                                     </a>
                                 </div>
                                 <div class="product-content">
                                     <a class="product-name" href="single-product.html">@item.Title</a>
                                     <div class="price-box pb-1">
-                                        <span class="new-price">$ @item.Price</span>
+                                            @if (item.PriceSale == 0)
+                                            {
+                                                <span class="new-price text-danger">$@item.Price</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="new-price text-danger">$@item.PriceSale</span>
+                                                <span class="old-price text-primary">$@item.Price</span>
+                                            }
                                     </div>
                                   
                                 </div>
@@ -1039,13 +1048,22 @@
                                 <div class="product-list-item">
                                     <div class="product-img img-zoom-effect">
                                         <a href="single-product.html">
-                                            <img class="img-full" src="~/assets/images/product/small-size/@item.Image" alt="Product Images">
+                                            <img class="img-full" src="@item.Image" alt="Product Images">
                                         </a>
                                     </div>
                                     <div class="product-content">
                                         <a class="product-name" href="single-product.html">@item.Title</a>
                                         <div class="price-box pb-1">
-                                            <span class="new-price">$ @item.Price</span>
+                                            @if (item.PriceSale == 0)
+                                            {
+                                                <span class="new-price text-danger">$@item.Price</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="new-price text-danger">$@item.PriceSale</span>
+                                                <span class="old-price text-primary">$@item.Price</span>
+                                            }
                                         </div>
                                         <div class="rating-box-wrap">
                                             <div class="rating-box">

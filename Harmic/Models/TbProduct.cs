@@ -7,7 +7,7 @@ public partial class TbProduct
 {
     public int ProductId { get; set; }
 
-    public string? Title { get; set; }
+    public required string Title { get; set; }
 
     public string? Alias { get; set; }
 
@@ -43,7 +43,7 @@ public partial class TbProduct
 
     public int? Star { get; set; }
 
-    public virtual TbProductCategory? CategoryProduct { get; set; }
+    public virtual required TbProductCategory CategoryProduct { get; set; }
 
     public virtual ICollection<TbOrderDetail> TbOrderDetails { get; set; } = new List<TbOrderDetail>();
 }
