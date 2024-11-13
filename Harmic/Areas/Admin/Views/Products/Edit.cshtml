@@ -52,7 +52,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="CategoryProductId" class="control-label">Danh Mục</label>
-                                    <input asp-for="CategoryProductId" class="form-control" />
+                                    <select asp-for="CategoryProductId" class="form-control" asp-items="ViewBag.CategoryProductId">
+                                        <option value="0" selected>🐖🦎 Chọn Danh Mục 🦘🐫</option>
+                                    </select>
 
                                     <span asp-validation-for="CategoryProductId" class="text-danger"></span>
                                 </div>
@@ -63,11 +65,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Image" class="control-label">Chọn Ảnh</label>
-                                    <div class="custom-file">
-                                        <input asp-for="Image" type="file" class="custom-file-input" id="ImageUpload">
-                                        <label class="custom-file-label" for="ImageUpload">Chọn tệp ảnh...</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <button type="button" class="btn btn-success" onclick="openDialog()">Choose a picture</button>
+                                        </div>
+                                        <input type="text" class="form-control" id="file_input" asp-for="Image" aria-describedby="button-addon2" />
                                     </div>
-                                    <small class="form-text text-muted">Chọn ảnh từ máy tính của bạn (định dạng JPG, PNG).</small>
                                     <span asp-validation-for="Image" class="text-danger"></span>
                                 </div>
 
@@ -108,3 +111,12 @@
         </div>
     </section>
 </div>
+@{
+    var summerNote = new Harmic.Areas.Admin.Models.SummerNote("#Detail");
+    <partial name="_SummerNote" model="summerNote" />
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

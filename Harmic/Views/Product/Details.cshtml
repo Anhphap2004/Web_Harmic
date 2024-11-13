@@ -2,6 +2,7 @@
 @{
 	List<TbProductReview> productReview = ViewBag.productReview;
 	List<TbProduct> productRelated = ViewBag.productRelated;
+	List<TbProductCategory> CategoryProduct = ViewBag.CategoryProduct;
 }
 <!-- Begin Main Content Area  -->
 <main class="main-content">
@@ -90,20 +91,17 @@
 								</ul>
 								<div class="product-category text-matterhorn pb-2">
 									<span class="title">Categories :</span>
-									<ul>
-										<li>
-											<a href="javascript:void(0)">Natural,</a>
-										</li>
-										<li>
-											<a href="javascript:void(0)">Organic,</a>
-										</li>
-										<li>
-											<a href="javascript:void(0)">Beautiful,</a>
-										</li>
-										<li>
-											<a href="javascript:void(0)">Organic Food</a>
-										</li>
-									</ul>
+									@foreach (var p in CategoryProduct)
+									{
+										string sUrl = $"/Product/{p.Alias}-{p.CategoryProductId}.html";
+										<ul>
+											<li>
+												<a href="@sUrl" class="title=">@p.Title</a>
+											</li>
+										</ul>
+										
+									}
+					
 								</div>
 								<div class="product-category product-tags text-matterhorn pb-4">
 									<span class="title">Product Tags :</span>

@@ -1,6 +1,7 @@
 ﻿@{
     List<TbProductCategory> productCategories= ViewBag.productCategories;
     List<TbProduct> productNew = ViewBag.productNew;
+
 }
 
  <!-- Begin Slider Area -->
@@ -944,15 +945,16 @@
                     <div class="swiper-wrapper">
                     @foreach  (var item in productNew.Take(8))
                     {
+                            string sUrl = $"/Product/{item.Alias}-{item.ProductId}.html";
                         <div class="swiper-slide">
                             <div class="product-item">
                                 <div class="product-img img-zoom-effect">
-                                    <a href="single-product.html">
+                                    <a href="@sUrl">
                                         <img class="img-full" src="@item.Image" alt="Product Images">
                                     </a>
                                 </div>
                                 <div class="product-content">
-                                    <a class="product-name" href="single-product.html">@item.Title</a>
+                                    <a class="product-name" href="@sUrl">@item.Title</a>
                                     <div class="price-box pb-1">
                                             @if (item.PriceSale == 0)
                                             {
@@ -1044,15 +1046,16 @@
                     <div class="swiper-wrapper">
                         @foreach (var item in productNew.Take(6))
                         {
+                            string sUrl = $"/Product/{item.Alias}-{item.ProductId}.html";
                             <div class="swiper-slide">
                                 <div class="product-list-item">
                                     <div class="product-img img-zoom-effect">
-                                        <a href="single-product.html">
+                                        <a href="@sUrl">
                                             <img class="img-full" src="@item.Image" alt="Product Images">
                                         </a>
                                     </div>
                                     <div class="product-content">
-                                        <a class="product-name" href="single-product.html">@item.Title</a>
+                                        <a class="product-name" href="@sUrl">@item.Title</a>
                                         <div class="price-box pb-1">
                                             @if (item.PriceSale == 0)
                                             {
