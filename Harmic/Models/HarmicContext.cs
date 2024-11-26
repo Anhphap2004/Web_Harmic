@@ -57,9 +57,7 @@ public partial class HarmicContext : DbContext
 
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.FullName).HasMaxLength(50);
-            entity.Property(e => e.LastLogin)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.Property(e => e.LastLogin).HasColumnType("datetime");
             entity.Property(e => e.Password).HasMaxLength(50);
             entity.Property(e => e.Phone).HasMaxLength(50);
             entity.Property(e => e.Username).HasMaxLength(50);

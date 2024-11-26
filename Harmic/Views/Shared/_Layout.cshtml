@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="zxx">
 
 <head>
@@ -105,8 +106,8 @@
                                                 <i class="pe-7s-users"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
-                                                <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                                                <li><a class="dropdown-item" href="login-register.html">Login | Register</a></li>
+                                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Home" asp-action="Logout">Đăng Xuất</a></li>
+                                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Register" asp-action="Index" >Register</a></li>
                                             </ul>
                                         </li>
                                         <li class="d-none d-md-block">
@@ -189,7 +190,7 @@
                                         <i class="pe-7s-users"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
-                                        <li><a class="dropdown-item" href="my-account.html">My account</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Register" asp-action="Index" >My account</a></li>
                                         <li><a class="dropdown-item" href="login-register.html">Login | Register</a></li>
                                     </ul>
                                 </li>

@@ -1,7 +1,7 @@
-using Harmic.Models;
+﻿using Harmic.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
+using Harmic.Utilities;
 namespace Harmic.Controllers
 {
     public class HomeController : Controller
@@ -32,5 +32,6 @@ namespace Harmic.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+      
     }
 }
