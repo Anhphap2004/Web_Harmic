@@ -150,7 +150,7 @@
 									@foreach (var p in productRelated)
 									{
 										<a href="javascript:void(0)" class="swiper-slide">
-											<img class="img-full" src="@p.Image" alt="Product Thumnail">
+											<img class="img-full" src="@p.Image" style="width: 200px; height: 100px" alt="Product Thumnail">
 										</a>
 									}
 								</div>
@@ -233,23 +233,24 @@
 											}
 										</ul>
 									</div>
-									<form class="feedback-form pt-8" action="#">
+									<form class="feedback-form pt-8" method="post">
+										<input type="hidden" id="c_menuId" name="menuId" value="@ViewBag.productid" />
 										<div class="group-input">
 											<div class="form-field me-md-6 mb-6 mb-md-0">
-												<input type="text" name="name" placeholder="Your Name*" class="input-field">
+												<input type="text" id="c_name" name="name" placeholder="Your Name*" class="input-field">
 											</div>
 											<div class="form-field me-md-6 mb-6 mb-md-0">
-												<input type="text" name="email" placeholder="Your Email*" class="input-field">
+												<input type="text" id="c_email" name="email" placeholder="Your Email*" class="input-field">
 											</div>
 											<div class="form-field">
-												<input type="text" name="number" placeholder="Phone number" class="input-field">
+												<input type="text" id="c_phone" name="number" placeholder="Phone number" class="input-field">
 											</div>
 										</div>
 										<div class="form-field mt-6">
-											<textarea name="message" placeholder="Message" class="textarea-field"></textarea>
+											<textarea name="message" id="c_message" placeholder="Message" class="textarea-field"></textarea>
 										</div>
 										<div class="button-wrap mt-8">
-											<button type="submit" value="submit" class="btn btn-custom-size lg-size btn-secondary btn-primary-hover btn-lg rounded-0" name="submit">Submit</button>
+											<button type="submit" id="c_submit" value="submit" class="btn btn-custom-size lg-size btn-secondary btn-primary-hover btn-lg rounded-0" name="submit">Submit</button>
 										</div>
 									</form>
 								</div>
@@ -301,7 +302,7 @@
 										<div class="product-item">
 											<div class="product-img img-zoom-effect">
 												<a href="single-product.html">
-													<img class="img-full" src="@item.Image" alt="Product Images">
+													<img class="img-full" src="@item.Image" style="width: 320px; height: 150px" alt="Product Images">
 												</a>
 												<div class="product-add-action">
 													<ul>
@@ -362,3 +363,45 @@
 	</div>
 </main>
 <!-- Main Content Area End Here  -->
+@section Scripts {
+	<script>
+			 $(document).ready(function () {
+			$("#c_submit").click(function () {
+				// Lấy giá trị từ các input
+				let _name = $("#c_name").val();
+				let _phone = $("#c_phone").val();
+				let _email = $("#c_email").val();
+				let _message = $("#c_message").val();
+				let _menuId = $("#c_menuId").val();  
+
+				// Gửi dữ liệu qua AJAX
+				$.ajax({
+					url: "/Product/Create", // URL endpoint trong Controller
+					type: "POST",           // Phương thức POST
+					data: {
+						menuId: _menuId,
+						name: _name,
+						phone: _phone,
+						email: _email,
+						message: _message
+					},
+					success: function (result) {
+						if (result.status) { // Nếu trả về thành công
+							$("#c_name").val(""); // Reset các ô input
+							$("#c_phone").val("");
+							$("#c_email").val("");
+							$("#c_message").val("");
+							toastr.success('Gửi thành công!');
+						} else { // Nếu thất bại
+							toastr.error('Gửi không thành công!');
+						}
+					},
+					error: function () {
+						toastr.error('Có lỗi xảy ra, vui lòng thử lại!');
+					}
+				});
+			});
+		});
+
+	</script>
+}

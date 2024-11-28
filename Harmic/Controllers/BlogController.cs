@@ -56,7 +56,8 @@ namespace Harmic.Controllers
                     Detail = message,
                     CreatedDate = DateTime.Now,
                     IsActive = true,
-                    
+                    Image = "cho.jpg",
+
                 };
 
                 // Thêm vào cơ sở dữ liệu
