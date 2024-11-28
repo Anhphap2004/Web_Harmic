@@ -12,7 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/favicon.ico" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.leanhduc.pro.vn/utilities/animation/shake-effect/style.css" />
     <!-- CSS
     ============================================ -->
     <!-- Vendor CSS (Contain Bootstrap, Icon Fonts) -->
@@ -32,46 +33,56 @@
 </head>
 
 <body>
-
+    <div>
+        <a class="AnhhPhapp-tet-left" href="#">
+            <img alt="tet" src="~/assets/TrangTri/img-before-head.webp" style="width:200px;" />
+        </a>
+    </div>
+    <div>
+        <a class="AnhhPhapp-tet-right" href="#">
+            <img alt="tet" src="~/assets/TrangTri/mat-trang-long-den-trung-thu.webp" style="width:150px;" />
+        </a>
+    </div>
     <div class="main-wrapper">
 
         <!-- Begin Main Header Area -->
-        <header class="main-header_area position-relative">
+        <header class="main-header_area position-relative" style="background-color: #a80f0f">
             <div class="header-top border-bottom d-none d-md-block">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-6">
                             <div class="header-top-left">
                                 <ul class="dropdown-wrap text-matterhorn">
-                                    <li class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="languageButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <li class="dropdown text-white">
+                                        <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="languageButton" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
                                             English
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="languageButton">
-                                            <li><a class="dropdown-item" href="#">French</a></li>
-                                            <li><a class="dropdown-item" href="#">Italian</a></li>
-                                            <li><a class="dropdown-item" href="#">Spanish</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="languageButton" style="background-color: #333;">
+                                            <li><a class="dropdown-item" href="#" style="color: white;">French</a></li>
+                                            <li><a class="dropdown-item" href="#" style="color: white;">Italian</a></li>
+                                            <li><a class="dropdown-item" href="#" style="color: white;">Spanish</a></li>
                                         </ul>
                                     </li>
+
                                     <li class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="currencyButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="currencyButton" style="color: white;" data-bs-toggle="dropdown" aria-expanded="false">
                                             USD
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="currencyButton">
-                                            <li><a class="dropdown-item" href="#">GBP</a></li>
-                                            <li><a class="dropdown-item" href="#">ISO</a></li>
+                                            <li><a class="dropdown-item" style="color: white;" href="#">GBP</a></li>
+                                            <li><a class="dropdown-item" style="color: white;" href="#">ISO</a></li>
                                         </ul>
                                     </li>
-                                    <li>
+                                    <li style="color: white;">
                                         Call Us
-                                        <a href="tel://3965410">3965410</a>
+                                        <a style="color: white;" href="tel://3965410">3965410</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="header-top-right text-matterhorn">
-                                <p class="shipping mb-0">Free delivery on order over <span>$200</span></p>
+                                <p class="shipping mb-0" style="color: white;">Free delivery on order over <span>$200</span></p>
                             </div>
                         </div>
                     </div>
@@ -96,14 +107,14 @@
                                             <option value="product-item-5">Product Item 05</option>
                                         </select>
                                         <input class="input-field" type="text" placeholder="Search Products">
-                                        <button class="btn btn-outline-whisper btn-primary-hover" type="submit"><i class="pe-7s-search"></i></button>
+                                        <button class="btn btn-outline-whisper btn-primary-hover" type="submit"><i style="color: white" class="pe-7s-search"></i></button>
                                     </form>
                                 </div>
                                 <div class="header-right">
                                     <ul>
                                         <li class="dropdown d-none d-md-block">
                                             <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="pe-7s-users"></i>
+                                                <i style="color: white;" class="pe-7s-users"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
                                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Home" asp-action="Logout">Đăng Xuất</a></li>
@@ -112,23 +123,23 @@
                                         </li>
                                         <li class="d-none d-md-block">
                                             <a href="wishlist.html">
-                                                <i class="pe-7s-like"></i>
+                                                <i style="color: white;" class="pe-7s-like"></i>
                                             </a>
                                         </li>
                                         <li class="d-block d-lg-none">
                                             <a href="#searchBar" class="search-btn toolbar-btn">
-                                                <i class="pe-7s-search"></i>
+                                                <i style="color: white;" class="pe-7s-search"></i>
                                             </a>
                                         </li>
                                         <li class="minicart-wrap me-3 me-lg-0">
                                             <a href="#miniCart" class="minicart-btn toolbar-btn">
-                                                <i class="pe-7s-shopbag"></i>
+                                                <i style="color: white;" class="pe-7s-shopbag"></i>
                                                 <span class="quantity">3</span>
                                             </a>
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
                                             <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">
-                                                <i class="pe-7s-menu"></i>
+                                                <i style="color: white;" class="pe-7s-menu"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -138,7 +149,8 @@
                     </div>
                 </div>
             </div>
-            <div class="main-header header-sticky" data-bg-color="#bac34e">
+            <div class="main-header header-sticky" style="background-color:#f1f1f1;">
+                <!-- Màu nền sáng như #f8f9fa -->
                 <div class="container">
                     <div class="main-header_nav position-relative">
                         <div class="row align-items-center">
@@ -146,7 +158,7 @@
                                 <div class="main-menu">
                                     <nav class="main-nav">
                                         <ul>
-                                        @await Component.InvokeAsync("MenuTop")
+                                            @await Component.InvokeAsync("MenuTop")
                                         </ul>
                                     </nav>
                                 </div>
@@ -155,6 +167,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="mobile-menu_wrapper" id="mobileMenu">
                 <div class="harmic-offcanvas-body">
                     <div class="inner-body">
@@ -677,6 +690,8 @@
     <script src="~/assets/toastr/toastr.min.js"></script>
     <!--Main JS (Common Activation Codes)-->
     <script src="~/assets/js/main.js"></script>
+    <script src="https://cdn.leanhduc.pro.vn/jquery/3.6.0.min.js"></script>
+    <script src="https://cdn.leanhduc.pro.vn/utilities/multi-color-star-effects/main.js"></script>
     @RenderSection("Scripts", required: false)
 
 </body>
