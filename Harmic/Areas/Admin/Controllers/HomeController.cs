@@ -7,8 +7,13 @@ namespace Harmic.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+            if(!Function.IsLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }    
             return View();
         }
+        
         public Task<IActionResult> Logout()
         {
             // Logic xử lý logout
