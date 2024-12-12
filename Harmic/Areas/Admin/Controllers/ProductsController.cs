@@ -61,12 +61,12 @@ namespace Harmic.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                tbProduct.Alias = Harmic.Utilities.Function.TitleSlugGenerationAlias(tbProduct.Title);
                 _context.Add(tbProduct);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryProductId"] = new SelectList(_context.TbProductCategories, "CategoryProductId", "CategoryProductId", tbProduct.CategoryProductId);
+            ViewData["CategoryProductId"] = new
+                SelectList(_context.TbProductCategories, "CategoryProductId", "CategoryProductId", tbProduct.CategoryProductId);
             return View(tbProduct);
         }
 

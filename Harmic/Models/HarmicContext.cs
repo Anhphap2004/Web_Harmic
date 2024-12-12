@@ -15,6 +15,24 @@ public partial class HarmicContext : DbContext
     {
     }
 
+    public virtual DbSet<Attendance> Attendances { get; set; }
+
+    public virtual DbSet<Customer> Customers { get; set; }
+
+    public virtual DbSet<Employee> Employees { get; set; }
+
+    public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<Payment> Payments { get; set; }
+
+    public virtual DbSet<Role> Roles { get; set; }
+
+    public virtual DbSet<Salary> Salaries { get; set; }
+
+    public virtual DbSet<Sale> Sales { get; set; }
+
+    public virtual DbSet<Shift> Shifts { get; set; }
+
     public virtual DbSet<TbAccount> TbAccounts { get; set; }
 
     public virtual DbSet<TbBlog> TbBlogs { get; set; }
@@ -45,10 +63,209 @@ public partial class HarmicContext : DbContext
 
     public virtual DbSet<TbRole> TbRoles { get; set; }
 
- 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Attendance>(entity =>
+        {
+            entity.HasKey(e => e.AttendanceId).HasName("PK__attendan__20D6A968F87A75C3");
+
+            entity.ToTable("attendance");
+
+            entity.Property(e => e.AttendanceId).HasColumnName("attendance_id");
+            entity.Property(e => e.CheckIn).HasColumnName("check_in");
+            entity.Property(e => e.CheckOut).HasColumnName("check_out");
+            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasColumnName("status");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.Attendances)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__attendanc__emplo__2739D489");
+        });
+
+        modelBuilder.Entity<Customer>(entity =>
+        {
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D808512E04");
+
+            entity.HasIndex(e => e.Email, "UQ__Customer__AB6E6164A1DA942B").IsUnique();
+
+            entity.Property(e => e.Address)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("address");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("name");
+            entity.Property(e => e.Phone)
+                .HasMaxLength(15)
+                .IsUnicode(false)
+                .HasColumnName("phone");
+        });
+
+        modelBuilder.Entity<Employee>(entity =>
+        {
+            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA85D2735FD");
+
+            entity.ToTable("employees");
+
+            entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(50)
+                .HasColumnName("first_name");
+            entity.Property(e => e.HireDate).HasColumnName("hire_date");
+            entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .HasColumnName("last_name");
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(15)
+                .HasColumnName("phone_number");
+            entity.Property(e => e.Position)
+                .HasMaxLength(50)
+                .HasColumnName("position");
+            entity.Property(e => e.Salary)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("salary");
+            entity.Property(e => e.Status)
+                .HasMaxLength(10)
+                .HasColumnName("status");
+
+            entity.HasMany(d => d.Roles).WithMany(p => p.Employees)
+                .UsingEntity<Dictionary<string, object>>(
+                    "EmployeeRole",
+                    r => r.HasOne<Role>().WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__employee___role___245D67DE"),
+                    l => l.HasOne<Employee>().WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__employee___emplo__236943A5"),
+                    j =>
+                    {
+                        j.HasKey("EmployeeId", "RoleId").HasName("PK__employee__124E9DF45361E1CE");
+                        j.ToTable("employee_roles");
+                        j.IndexerProperty<int>("EmployeeId").HasColumnName("employee_id");
+                        j.IndexerProperty<int>("RoleId").HasColumnName("role_id");
+                    });
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCF53E86BE8");
+
+            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+            entity.Property(e => e.OrderDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("order_date");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Orders__customer__06CD04F7");
+        });
+
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A387AD7D5F2");
+
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.PaymentDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("payment_date");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Payments__order___0E6E26BF");
+        });
+
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.RoleId).HasName("PK__roles__760965CC9917B93A");
+
+            entity.ToTable("roles");
+
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
+            entity.Property(e => e.RoleName)
+                .HasMaxLength(50)
+                .HasColumnName("role_name");
+        });
+
+        modelBuilder.Entity<Salary>(entity =>
+        {
+            entity.HasKey(e => e.SalaryId).HasName("PK__salaries__A3C71C51476CF68C");
+
+            entity.ToTable("salaries");
+
+            entity.Property(e => e.SalaryId).HasColumnName("salary_id");
+            entity.Property(e => e.BaseSalary)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("base_salary");
+            entity.Property(e => e.Bonus)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("bonus");
+            entity.Property(e => e.Deductions)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("deductions");
+            entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+            entity.Property(e => e.PaymentDate).HasColumnName("payment_date");
+            entity.Property(e => e.TotalSalary)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("total_salary");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.Salaries)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__salaries__employ__2A164134");
+        });
+
+        modelBuilder.Entity<Sale>(entity =>
+        {
+            entity.HasKey(e => e.SaleId).HasName("PK__sales__E1EB00B298F9AFF6");
+
+            entity.ToTable("sales");
+
+            entity.Property(e => e.SaleId).HasColumnName("sale_id");
+            entity.Property(e => e.Amount)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("amount");
+            entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+            entity.Property(e => e.SaleDate).HasColumnName("sale_date");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.Sales)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__sales__employee___2FCF1A8A");
+        });
+
+        modelBuilder.Entity<Shift>(entity =>
+        {
+            entity.HasKey(e => e.ShiftId).HasName("PK__shifts__7B267220D615C89B");
+
+            entity.ToTable("shifts");
+
+            entity.Property(e => e.ShiftId).HasColumnName("shift_id");
+            entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+            entity.Property(e => e.EndTime).HasColumnName("end_time");
+            entity.Property(e => e.ShiftDate).HasColumnName("shift_date");
+            entity.Property(e => e.StartTime).HasColumnName("start_time");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.Shifts)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__shifts__employee__2CF2ADDF");
+        });
+
         modelBuilder.Entity<TbAccount>(entity =>
         {
             entity.HasKey(e => e.AccountId);
@@ -103,6 +320,7 @@ public partial class HarmicContext : DbContext
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.Detail).HasMaxLength(200);
             entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.Image).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.Phone).HasMaxLength(50);
 
@@ -291,6 +509,7 @@ public partial class HarmicContext : DbContext
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.Detail).HasMaxLength(200);
             entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.Image).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.Phone).HasMaxLength(50);
             entity.Property(e => e.ProductReviewId).ValueGeneratedOnAdd();
